@@ -7,20 +7,38 @@
   <script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.production.min.js"></script>
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
   <script type="text/babel">
-    const root = document.getElementById("root");
-
     function App() {
-      const [num, setNum] = React.useState();
-      const onclick = () => {
-        setNum(Math.floor(Math.random() * 100));
+      // 환율 계산기
+      const [currency, setCurrency] = React.useState(0);
+      const [won, setWon] = React.useState(0);
+      const onChangeCurrency = (e) => {
+        setCurrency(e.target.value);
+        setWon(e.target.value * 1382);
+      };
+      const onChangeWon = (e) => {
+        setWon(e.target.value);
+        setCurrency(e.target.value / 1382);
+      };
+      const onReset = () => {
+        setCurrency(0);
+        setWon(0);
       };
       return (
         <div>
-          <h3>Total Clicks: {num}</h3>
-          <button onClick={onclick}>Click Me</button>
+          <h1>Currency Calculator</h1>
+          <div>
+            <input type="number" value={currency} onChange={onChangeCurrency} />
+            <span>달러</span>
+          </div>
+          <div>
+            <input type="number" value={won} onChange={onChangeWon} />
+            <span>원</span>
+          </div>
+          <button onClick={onReset}>초기화</button>
         </div>
       );
     }
+    const root = document.getElementById("root");
     ReactDOM.render(<App />, root);
   </script>
 </html>
