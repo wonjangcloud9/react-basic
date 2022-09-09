@@ -8,7 +8,19 @@
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
   <script type="text/babel">
     const root = document.getElementById("root");
-    const element = <h1>Hello, world!</h1>;
-    ReactDOM.render(element, root);
+
+    function App() {
+      const [num, setNum] = React.useState();
+      const onclick = () => {
+        setNum(Math.floor(Math.random() * 100));
+      };
+      return (
+        <div>
+          <h3>Total Clicks: {num}</h3>
+          <button onClick={onclick}>Click Me</button>
+        </div>
+      );
+    }
+    ReactDOM.render(<App />, root);
   </script>
 </html>
