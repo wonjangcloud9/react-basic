@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <body>
+    <div id="root"></div>
+  </body>
+  <script src="https://unpkg.com/react@17.0.2/umd/react.production.min.js"></script>
+  <script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.production.min.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script type="text/babel">
+    function App() {
+      // 출산율 개선
+      const [birth, setBirth] = React.useState(0);
+      const [death, setDeath] = React.useState(0);
+      const onChangeBirth = (e) => {
+        setBirth(e.target.value);
+        setDeath(e.target.value * 2);
+      };
+      const onChangeDeath = (e) => {
+        setDeath(e.target.value);
+        setBirth(e.target.value / 2);
+      };
+      const onReset = () => {
+        setBirth(0);
+        setDeath(0);
+      };
+      return (
+        <div>
+          <h1>출산율 개선</h1>
+          <div>
+            <input type="number" value={birth} onChange={onChangeBirth} />
+            <span>출산</span>
+          </div>
+          <div>
+            <input type="number" value={death} onChange={onChangeDeath} />
+            <span>사망</span>
+          </div>
+          <button onClick={onReset}>초기화</button>
+        </div>
+      );
+    }
+    const root = document.getElementById("root");
+    ReactDOM.render(<App />, root);
+  </script>
+</html>

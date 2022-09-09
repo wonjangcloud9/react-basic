@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <body>
+    <div id="root"></div>
+  </body>
+  <script src="https://unpkg.com/react@17.0.2/umd/react.production.min.js"></script>
+  <script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.production.min.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script type="text/babel">
+    function App() {
+      // dream
+      const [dream, setDream] = React.useState("");
+      const [dreams, setDreams] = React.useState([]);
+      const onChangeDream = (e) => {
+        setDream(e.target.value);
+      };
+      const onAddDream = () => {
+        setDreams([...dreams, dream]);
+        setDream("");
+      };
+      const onRemoveDream = (index) => {
+        setDreams(dreams.filter((dream, i) => i !== index));
+      };
+      return (
+        <div>
+          <h1>My Dream</h1>
+          <div>
+            <input type="text" value={dream} onChange={onChangeDream} />
+            <button onClick={onAddDream}>Add</button>
+          </div>
+          <ul>
+            {dreams.map((dream, index) => (
+              <li key={index}>
+                {dream}
+                <button onClick={() => onRemoveDream(index)}>Remove</button>
+              </li>
+            ))}
+          </ul>
+        </div>
+      );
+    }
+    const root = document.getElementById("root");
+    ReactDOM.render(<App />, root);
+  </script>
+</html>

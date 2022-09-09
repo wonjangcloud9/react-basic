@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <body>
+    <div id="root"></div>
+  </body>
+  <script src="https://unpkg.com/react@17.0.2/umd/react.production.min.js"></script>
+  <script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.production.min.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script type="text/babel">
+    function App() {
+      // 호텔 예약
+      const [name, setName] = React.useState("");
+      const [checkIn, setCheckIn] = React.useState("");
+      const [checkOut, setCheckOut] = React.useState("");
+      const onChangeName = (e) => {
+        setName(e.target.value);
+      };
+      const onChangeCheckIn = (e) => {
+        setCheckIn(e.target.value);
+      };
+      const onChangeCheckOut = (e) => {
+        setCheckOut(e.target.value);
+      };
+      const onReset = () => {
+        setName("");
+        setCheckIn("");
+        setCheckOut("");
+      };
+      return (
+        <div>
+          <h1>Hotel Reservation</h1>
+          <div>
+            <label>이름</label>
+            <input type="text" value={name} onChange={onChangeName} />
+          </div>
+          <div>
+            <label>체크인</label>
+            <input type="date" value={checkIn} onChange={onChangeCheckIn} />
+          </div>
+          <div>
+            <label>체크아웃</label>
+            <input type="date" value={checkOut} onChange={onChangeCheckOut} />
+          </div>
+          <button onClick={onReset}>초기화</button>
+        </div>
+      );
+    }
+    const root = document.getElementById("root");
+    ReactDOM.render(<App />, root);
+  </script>
+</html>

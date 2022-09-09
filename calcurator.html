@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <body>
+    <div id="root"></div>
+  </body>
+  <script src="https://unpkg.com/react@17.0.2/umd/react.production.min.js"></script>
+  <script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.production.min.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script type="text/babel">
+    function App() {
+      // 계산기
+      const [result, setResult] = React.useState(0);
+      const [num1, setNum1] = React.useState(0);
+      const [num2, setNum2] = React.useState(0);
+      const onChangeNum1 = (e) => {
+        setNum1(e.target.value);
+        setResult(e.target.value + num2);
+      };
+      const onChangeNum2 = (e) => {
+        setNum2(e.target.value);
+        setResult(num1 + e.target.value);
+      };
+      const onReset = () => {
+        setNum1(0);
+        setNum2(0);
+        setResult(0);
+      };
+      return (
+        <div>
+          <h1>Calculator</h1>
+          <div>
+            <input type="number" value={num1} onChange={onChangeNum1} />
+            <span>+</span>
+            <input type="number" value={num2} onChange={onChangeNum2} />
+            <span>=</span>
+            <span>{result}</span>
+          </div>
+          <button onClick={onReset}>초기화</button>
+        </div>
+      );
+    }
+    const root = document.getElementById("root");
+    ReactDOM.render(<App />, root);
+  </script>
+</html>

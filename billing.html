@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <body>
+    <div id="root"></div>
+  </body>
+  <script src="https://unpkg.com/react@17.0.2/umd/react.production.min.js"></script>
+  <script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.production.min.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script type="text/babel">
+    function App() {
+      // 빌려주는 서비스
+      const [money, setMoney] = React.useState(0);
+      const [rate, setRate] = React.useState(0);
+      const [month, setMonth] = React.useState(0);
+      const [total, setTotal] = React.useState(0);
+      const onChangeMoney = (e) => {
+        setMoney(e.target.value);
+        setTotal(e.target.value * rate * month);
+      };
+      const onChangeRate = (e) => {
+        setRate(e.target.value);
+        setTotal(e.target.value * money * month);
+      };
+      const onChangeMonth = (e) => {
+        setMonth(e.target.value);
+        setTotal(e.target.value * money * rate);
+      };
+      const onReset = () => {
+        setMoney(0);
+        setRate(0);
+        setMonth(0);
+        setTotal(0);
+      };
+      return (
+        <div>
+          <h1>빌려주는 서비스</h1>
+          <div>
+            <input type="number" value={money} onChange={onChangeMoney} />
+            <span>원</span>
+          </div>
+          <div>
+            <input type="number" value={rate} onChange={onChangeRate} />
+            <span>%</span>
+          </div>
+          <div>
+            <input type="number" value={month} onChange={onChangeMonth} />
+            <span>개월</span>
+          </div>
+          <div>
+            <span>총금액: {total}</span>
+          </div>
+          <button onClick={onReset}>초기화</button>
+        </div>
+      );
+    }
+    const root = document.getElementById("root");
+    ReactDOM.render(<App />, root);
+  </script>
+</html>
